@@ -14,7 +14,6 @@ root.title("Wanderer Game")
 canvas = Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.pack()
 
-
 class GameAdmin:
     def __init__(self, canvas, root):
         pygame.mixer.init()
