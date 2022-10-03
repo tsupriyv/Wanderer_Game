@@ -7,10 +7,9 @@ from Tile import Tile
 
 IMAGE_SIZE = 75
 WIDTH = 10 * IMAGE_SIZE
-HEIGHT = 10 * IMAGE_SIZE
+HEIGHT = (10 * IMAGE_SIZE)+40
 
 root = Tk()
-root.title("Wanderer Game")
 canvas = Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.pack()
 
@@ -25,8 +24,8 @@ class GameAdmin:
         self.root = root
         self.canvas = canvas
         self.frame = Frame(self.root)
-        self.lives_frame = Frame(self.root)
-        self.lives_frame.pack()
+        self.lives_frame = Frame(self.canvas)
+        self.lives_frame.pack(side=TOP)
         self.dir = "images/"
         self.count_move = 1
         self.floor_location = []
@@ -70,9 +69,12 @@ class GameAdmin:
         self.hero_lives = Label(self.lives_frame, width=20,  fg="black", font=("bold", "16"), text=self.hero.health)
         self.hero_lives.pack(side=LEFT)
 
-        # self.monster_health = ()
         self.monster_lives = Label(self.lives_frame, width=20,  fg="black", font=("bold", "16"), text=(self.skeleton_1.health + self.skeleton_2.health + self.skeleton_3.health + self.boss.health))
         self.monster_lives.pack(side=RIGHT)
+        self.header = Frame(self.root, height=30)
+        self.canvas.configure(background = "blue")
+        # self.header.pack(side=TOP)
+
 
     def __random_pos__(self):
         for i in range(10):
@@ -216,10 +218,10 @@ class GameAdmin:
         for x in range(10):
             for y in range(10):
                 if (x, y) not in self.walls_location:
-                    tile = Tile(x * 75, y * 75, self.root.floor)
+                    tile = Tile(x * 75, (y * 75)+40, self.root.floor)
                     tile.create_tile(self.canvas)
                 else:
-                    tile = Tile(x * 75, y * 75, self.root.wall)
+                    tile = Tile(x * 75, (y * 75)+40, self.root.wall)
                     tile.create_tile(self.canvas)
             y = 0
 
@@ -278,6 +280,8 @@ def main():
 
     is_game_over=False
     while True:
+        game.root.title("Wanderer Game")
+
         if not is_game_over:
             game.lives_frame.destroy()
             game.lives_frame = Frame(game.root)
@@ -300,5 +304,3 @@ if __name__ == '__main__':
     main()
     root.mainloop()
 
- # add play again button,
-# count life

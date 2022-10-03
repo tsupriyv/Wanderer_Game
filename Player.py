@@ -22,7 +22,7 @@ class Player:
 
     def create_player(self, source):
         if not self.is_deleted:
-            source.create_image(self.x * 75, self.y * 75, image=self.image, anchor=NW)
+            source.create_image(self.x * 75, (self.y * 75)+40, image=self.image, anchor=NW)
 
     def delete(self, source, opponent=None):
         source.delete(self)
